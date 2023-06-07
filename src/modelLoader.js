@@ -16,7 +16,7 @@ const getMetrics = (object) => {
 
 const adjustSize = (object, maxDimension) => {
   // Too large or too small models may not be visible so we scale them to a reasonable size
-  let scaleFactor = 10 / maxDimension;
+  let scaleFactor = 8 / maxDimension;
 
   object.scale.set(scaleFactor, scaleFactor, scaleFactor);
 };
@@ -28,12 +28,12 @@ const alignModelPosition = (object) => {
   // centerModel(object); todo: doesn't work well when the object contains lights or camera
 
   // need to recalculate after scale
-  const { boundingBox } = getMetrics(object);
-  object.position.set(
-    boundingBox.min.x < 0 ? boundingBox.min.x * -1 : 0,
-    boundingBox.min.y < 0 ? boundingBox.min.y * -1 : 0,
-    boundingBox.min.z < 0 ? boundingBox.min.z * -1 : 0
-  );
+  // const { boundingBox } = getMetrics(object);
+  // object.position.set(
+  //   boundingBox.min.x < 0 ? boundingBox.min.x * -1 : 0,
+  //   boundingBox.min.y < 0 ? boundingBox.min.y * -1 : 0,
+  //   boundingBox.min.z < 0 ? boundingBox.min.z * -1 : 0
+  // );
 };
 
 // export const modelLoader = async (modelUrl) =>
@@ -50,17 +50,17 @@ export const onModelLoaded = (gltfScene) => {
   let modelCamera = null;
   let modelLight = null;
   const model = gltfScene.scene;
-
-  model.traverse(function (child) {
-    if (child.isMesh) {
-      child.castShadow = true;
-    } else if (child.isCamera && modelCamera === null) {
-      modelCamera = child;
-    } else if (child.isLight && modelLight === null) {
-      child.castShadow = true;
-      modelLight = child;
-    }
-  });
+	//
+  // model.traverse(function (child) {
+  //   if (child.isMesh) {
+  //     child.castShadow = true;
+  //   } else if (child.isCamera && modelCamera === null) {
+  //     modelCamera = child;
+  //   } else if (child.isLight && modelLight === null) {
+  //     child.castShadow = true;
+  //     modelLight = child;
+  //   }
+  // });
 
   alignModelPosition(model);
 

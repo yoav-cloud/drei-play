@@ -3,3 +3,7 @@
   text-align: center;
   height: 100vh;
 }
+
+canvas {
+    background-color: #121212;
+}
